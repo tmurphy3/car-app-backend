@@ -9,4 +9,9 @@ routes.get("/cars", (req, res) => {
     .then((car) => res.json(car));
 });
 
+routes.get('/test', (req, res) => {
+for (const key in req.query) {
+  console.log(key, req.query[key])
+}})
+
 module.exports = routes;
