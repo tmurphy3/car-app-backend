@@ -15,9 +15,10 @@ for (const key in req.query) {
 }})
 
 routes.get('/cars2', (req,res) => {
-  Cars.find().distinct("manufacturer", function(error, ids) {
-    console.log(ids)
+  Cars.find().distinct("fuel", function(error, filter) {
+    return filter
   })
+  .then((filter) => res.send(filter))
 })
 
 module.exports = routes;
