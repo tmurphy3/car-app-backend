@@ -14,4 +14,10 @@ for (const key in req.query) {
   console.log(key, req.query[key])
 }})
 
+routes.get('/cars2', (req,res) => {
+  Cars.find().distinct("manufacturer", function(error, ids) {
+    console.log(ids)
+  })
+})
+
 module.exports = routes;
