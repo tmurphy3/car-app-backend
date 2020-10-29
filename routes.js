@@ -15,9 +15,57 @@ routes.get("/test", (req, res) => {
   }
 });
 
-routes.get("/cars2", (req, res) => {
+routes.get("/manufacturers", (req, res) => {
+  Cars.find()
+    .distinct("manufacturer", function (error, filter) {
+      return filter;
+    })
+    .then((filter) => res.send(filter));
+});
+
+routes.get("/year", (req, res) => {
   Cars.find()
     .distinct("year", function (error, filter) {
+      return filter;
+    })
+    .then((filter) => res.send(filter));
+});
+
+routes.get("/price", (req, res) => {
+  Cars.find()
+    .distinct("price", function (error, filter) {
+      return filter;
+    })
+    .then((filter) => res.send(filter));
+});
+
+routes.get("/model", (req, res) => {
+  Cars.find()
+    .distinct("model", function (error, filter) {
+      return filter;
+    })
+    .then((filter) => res.send(filter));
+});
+
+routes.get("/size", (req, res) => {
+  Cars.find()
+    .distinct("size", function (error, filter) {
+      return filter;
+    })
+    .then((filter) => res.send(filter));
+});
+
+routes.get("/color", (req, res) => {
+  Cars.find()
+    .distinct("paint_color", function (error, filter) {
+      return filter;
+    })
+    .then((filter) => res.send(filter));
+});
+
+routes.get("/state", (req, res) => {
+  Cars.find()
+    .distinct("state", function (error, filter) {
       return filter;
     })
     .then((filter) => res.send(filter));
