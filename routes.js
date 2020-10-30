@@ -10,11 +10,6 @@ routes.get("/cars", (req, res) => {
     .then((car) => res.json(car));
 });
 
-routes.get("/cars", (req, res) => {
-  Cars.find()
-    .limit(10)
-    .then((car) => res.json(car));
-});
 
 routes.get("/test", (req, res) => {
   let queryObj = {};
