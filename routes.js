@@ -4,20 +4,13 @@ const Cars = require("./db/Cars");
 
 routes.get("/", (req, res) => res.send("welcome"));
 
-routes.get("/cars", (req, res) => {
-  Cars.find()
-    .limit(10)
-    .then((car) => res.json(car));
-});
-
-
 routes.get("/test", (req, res) => {
   let queryObj = {};
   for (let key in req.query) {
     queryObj[key] = `${req.query[key]}`;
   }
   Cars.find( queryObj )
-  .limit(500)
+  .limit(100)
   .then((filter) => res.send(filter));
 });
 
