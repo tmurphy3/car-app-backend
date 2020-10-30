@@ -10,28 +10,20 @@ routes.get("/cars", (req, res) => {
     .then((car) => res.json(car));
 });
 
-routes.get("/test", (req, res) => {
-  let queryString = "";
-  let arr = [];
-
-  for (let key in req.query) {
-    arr.push(key);
-  }
-
-  for (let i of arr) {
-    if (arr.indexOf(i) !== Object.keys(req.query).length - 1) {
-      queryString += `${i}: "${req.query[i]}", `;
-    } else {
-      queryString += `${i}: "${req.query[i]}"`;
-    }
-  }
-  res.send(queryString);
+routes.get("/cars", (req, res) => {
+  Cars.find()
+    .limit(10)
+    .then((car) => res.json(car));
 });
 
-routes.get("/test2", (req, res) => {
-  Cars.find({ manufacturer: "ford", paint_color: "red" })
-    .limit(500)
-    .then((filter) => res.send(filter));
+routes.get("/test", (req, res) => {
+  let queryObj = {};
+  for (let key in req.query) {
+    queryObj[key] = `${req.query[key]}`;
+  }
+  Cars.find( queryObj )
+  .limit(500)
+  .then((filter) => res.send(filter));
 });
 
 //find distinct values for filter
