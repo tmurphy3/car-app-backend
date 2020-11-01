@@ -1,10 +1,9 @@
 const routes = require("express").Router();
-const { query } = require("express");
 const Cars = require("./db/Cars");
 
 routes.get("/", (req, res) => res.send("welcome"));
 
-routes.get("/test", (req, res) => {
+routes.get("/results", (req, res) => {
   let queryObj = {};
   for (let key in req.query) {
     queryObj[key] = `${req.query[key]}`;
