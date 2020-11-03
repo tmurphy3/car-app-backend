@@ -13,6 +13,11 @@ routes.get("/results", (req, res) => {
   .then((filter) => res.send(filter));
 });
 
+routes.get("/details/:_id", (req, res) => {
+  Cars.find( {_id: req.params._id} )
+  .then((filter) => res.send(filter));
+});
+
 //find distinct values for filter
 routes.get("/manufacturers", (req, res) => {
   Cars.find()
