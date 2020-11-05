@@ -18,6 +18,12 @@ routes.get("/details/:_id", (req, res) => {
   .then((filter) => res.send(filter));
 });
 
+routes.get("/newest", (req, res) => {
+  Cars.find( { year: { $gte: 2019 }} )
+  .limit(30)
+  .then((filter) => res.send(filter));
+});
+
 //find distinct values for filter
 routes.get("/manufacturers", (req, res) => {
   Cars.find()
