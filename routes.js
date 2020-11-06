@@ -19,8 +19,14 @@ routes.get("/details/:_id", (req, res) => {
 });
 
 routes.get("/newest", (req, res) => {
-  Cars.find( { year: { $gte: 2019 }} )
-  .limit(30)
+  Cars.find( { year: { $gte: 2020 }} )
+  .limit(10)
+  .then((filter) => res.send(filter));
+});
+
+routes.get("/x", (req, res) => {
+  Cars.find( { price: { $gte: 10000 }} )
+  .limit(10)
   .then((filter) => res.send(filter));
 });
 
