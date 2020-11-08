@@ -3,25 +3,31 @@ const Cars = require("./db/Cars");
 
 routes.get("/", (req, res) => res.send("welcome"));
 
+routes.get("/test", (req, res) => {
+  Cars.find({ price: { $gt: 40000 } })
+    .limit(30)
+    .then((filter) => res.send(filter));
+});
+
 routes.get("/results", (req, res) => {
   let queryObj = {};
   for (let key in req.query) {
     queryObj[key] = `${req.query[key]}`;
   }
-  Cars.find( queryObj )
-  .limit(100)
-  .then((filter) => res.send(filter));
+
+  Cars.find(queryObj)
+    .limit(10)
+    .then((filter) => res.send(filter));
 });
 
 routes.get("/details/:_id", (req, res) => {
-  Cars.find( {_id: req.params._id} )
-  .then((filter) => res.send(filter));
+  Cars.find({ _id: req.params._id }).then((filter) => res.send(filter));
 });
 
 routes.get("/newest", (req, res) => {
-  Cars.find( { year: { $gte: 2019 }} )
-  .limit(30)
-  .then((filter) => res.send(filter));
+  Cars.find({ year: { $gte: 2019 } })
+    .limit(30)
+    .then((filter) => res.send(filter));
 });
 
 //find distinct values for filter
@@ -76,6 +82,14 @@ routes.get("/color", (req, res) => {
 routes.get("/state", (req, res) => {
   Cars.find()
     .distinct("state", function (error, filter) {
+      return filter;
+    })
+    .then((filter) => res.send(filter));
+});
+
+routes.get("/price", (req, res) => {
+  Cars.find()
+    .distinct("price", function (error, filter) {
       return filter;
     })
     .then((filter) => res.send(filter));
