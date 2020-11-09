@@ -4,7 +4,7 @@ const Cars = require("./db/Cars");
 routes.get("/", (req, res) => res.send("welcome"));
 
 routes.get("/test", (req, res) => {
-  Cars.find({ price: { $gt: 40000 } })
+  Cars.find()
     .limit(30)
     .then((filter) => res.send(filter));
 });
@@ -31,6 +31,14 @@ routes.get("/newest", (req, res) => {
 });
 
 //find distinct values for filter
+routes.get("/type", (req, res) => {
+  Cars.find()
+    .distinct("type", function (error, filter) {
+      return filter;
+    })
+    .then((filter) => res.send(filter));
+});
+
 routes.get("/manufacturers", (req, res) => {
   Cars.find()
     .distinct("manufacturer", function (error, filter) {
